@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">ExpenseManager</string>
+    <string name="already_have_an_account">Already have an account ?</string>
+    <string name="login">Login</string>
+    <string name="create_account">Create Account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="dont_t_have_an_account">Dont\'t Have An Account ?</string>
+    <string name="client_id">295792241514-996amblc6ph6nbs1jggiglb718o1obv4.apps.googleusercontent.com</string>
+    <string name="expense">Expense</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_transfer">Add Transfer</string>
+    <string name="add_split_button">Add Split Button</string>
+    <string name="track_expense">Track Expense</string>
+    <string name="expense_title">Expense Title</string>
+    <string name="expense_description">Expense Description</string>
+    <string name="enter_the_amount">Enter the amount</string>
+    <string name="choose_category">Choose Category</string>
+
+    <string-array name="expense_categories">
+
+        <item>GROCERIES</item>
+        <item>TRANSPORTATION</item>
+        <item>UTILITIES</item>
+        <item>ENTERTAINMENT</item>
+        <item> DINING_OUT</item>
+        <item> HEALTHCARE</item>
+        <item> EDUCATION</item>
+        <item> SHOPPING</item>
+        <item> TRAVEL</item>
+        <item> OTHER</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,13 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- Background color for the dialog -->
+    <solid android:color="#FFFFFF" /> <!-- You can change this color to whatever you prefer -->
+
+    <!-- Border color and thickness for the dialog -->
+    <stroke
+        android:width="2dp"
+        android:color="#CCCCCC" /> <!-- You can change this color and thickness as needed -->
+
+    <!-- Rounded corners for the dialog -->
+    <corners android:radius="8dp" /> <!-- You can adjust the radius to control the roundness of the corners -->
+</shape>
