@@ -1,8 +1,10 @@
 package com.example.expensemanager
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
@@ -16,15 +18,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
+import com.example.expensemanager.dataClasses.Split
 import com.example.expensemanager.dataClasses.Transaction
 import com.example.expensemanager.dataClasses.TransactionCategory
 import com.example.expensemanager.dataClasses.TransactionType
 import com.example.expensemanager.databinding.ActivityMainBinding
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.database
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
@@ -42,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         lateinit var auth:FirebaseAuth
         lateinit var database: DatabaseReference
     }
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
@@ -119,27 +123,32 @@ onFloatClicked()
 //        expenseDialog.window?.setBackgroundDrawable(getDrawable(R.drawable.dialog_background))
         splitDialog.window?.decorView?.setPadding(50)
         splitDialog.setCancelable(false)
-
-      val addSplitBt =   splitDialog.findViewById<Button>(R.id.addSplitBT);
-//      val cancelSplitBT = splitDialog.findViewById<Button>(R.id.cancelBTEDialog)
+      val titleText = splitDialog.findViewById<TextInputEditText>(R.id.splitTitle);
+      val addSplitBt =   splitDialog.findViewById<Button>(R.id.addSpliyBTEDialog);
+      val cancelSplitBT = splitDialog.findViewById<Button>(R.id.cancelBTEDialog)
         addSplitBt.setOnClickListener {
+            val contributors = ArrayList<String>();
+            contributors.add(auth.uid.toString());
+            val split:Split = Split("",titleText.text.toString(),contributors,0);
+database.child("splits").child(auth.uid.toString()).push().setValue(split).addOnFailureListener {
+    Log.e("FIREBASE",it.message.toString());
+    Toast.makeText(this,"Some error occured",Toast.LENGTH_SHORT).show();
+}
+    .addOnCompleteListener {
+        Toast.makeText(this,"Split Added Successfully",Toast.LENGTH_SHORT).show();
+        splitDialog.dismiss()
+        replaceFragment(SplitFragment());
+
+    }
 
 
-
-            database.child("expenses").child(auth.uid.toString()).push().setValue(transaction).addOnFailureListener {
-                Toast.makeText(this,it.localizedMessage,Toast.LENGTH_LONG).show()
-                expenseDialog.dismiss()
-            }.addOnCompleteListener {
-                Toast.makeText(this,"Expense Added",Toast.LENGTH_SHORT).show()
-                amountEditText.setText("")
-                descriptionEditText.setText("")
-                expenseDialog.findViewById<RadioGroup>(R.id.radio_group).check(R.id.transactionTypeExpense)
-                expenseDialog.dismiss()
-
-            }
+        }
+        cancelSplitBT.setOnClickListener {
+            titleText.setText("")
+            splitDialog.dismiss();
         }
         binding.addSplitBT.setOnClickListener {
-            Toast.makeText(this,"Split",Toast.LENGTH_SHORT).show()
+           splitDialog.show()
         }
         binding.addTransferBT.setOnClickListener {
             Toast.makeText(this,"Transfer",Toast.LENGTH_SHORT).show()
@@ -218,6 +227,16 @@ private fun setClickable(clicked: Boolean){
     private fun replaceFragment(fragment: Fragment){
 
      supportFragmentManager.beginTransaction().apply {
+//         when(fragment){
+//             ExpenseTracker()->binding.bottomNavigationView.selectedItemId =R.id.expense
+//             SplitFragment()->binding.bottomNavigationView.selectedItemId =R.id.split
+//             TransferFragment()->binding.bottomNavigationView.selectedItemId =R.id.transfer
+//             DashboardFragment()->binding.bottomNavigationView.selectedItemId =R.id.dashboard
+//             else->{
+//                 binding.bottomNavigationView.selectedItemId =R.id.expense
+//             }
+//         }
+
         replace(R.id.frame_layout,fragment)
         commit()
     }

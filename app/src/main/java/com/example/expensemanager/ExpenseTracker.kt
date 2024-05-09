@@ -14,7 +14,6 @@ import com.example.expensemanager.databinding.FragmentExpenseTrackerBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.getValue
 
@@ -65,7 +64,7 @@ private fun initLayout(){
 
 
     binding.transactionsRV.adapter = transactionAdapter
-    dbRef = FirebaseDatabase.getInstance().getReference().child("expenses");
+    dbRef = MainActivity.database.child("expenses");
     readDbRef = dbRef.child(MainActivity.auth.uid.toString())
 //deleteRef = FirebaseDatabase.getInstance().getReference().child("expenses")
 deleteRef = dbRef.child(MainActivity.auth.uid.toString())
