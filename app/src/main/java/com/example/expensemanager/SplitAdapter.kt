@@ -1,9 +1,10 @@
 package com.example.expensemanager
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.expensemanager.dataClasses.Split
@@ -32,7 +33,9 @@ val root = binding.root;
         holder.amountOwed.text = calculateAmountOwed(MainActivity.auth.uid.toString()).toString()
         holder.status.text = split.status;
         holder.root.setOnClickListener {
-            Toast.makeText(context,split.title,Toast.LENGTH_SHORT).show();
+           val intent  = Intent(context,SplitActivity::class.java);
+            intent.putExtra("id",split.id);
+            ContextCompat.startActivity(context,intent,null);
         }
     }
     fun updateData(data:ArrayList<Split>){

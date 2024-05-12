@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
+import com.example.expensemanager.dataClasses.Contributor
 import com.example.expensemanager.dataClasses.Split
 import com.example.expensemanager.dataClasses.Transaction
 import com.example.expensemanager.dataClasses.TransactionCategory
@@ -127,9 +128,10 @@ onFloatClicked()
       val addSplitBt =   splitDialog.findViewById<Button>(R.id.addSpliyBTEDialog);
       val cancelSplitBT = splitDialog.findViewById<Button>(R.id.cancelBTEDialog)
         addSplitBt.setOnClickListener {
-            val contributors = ArrayList<String>();
-            contributors.add(auth.uid.toString());
-            val split:Split = Split("",titleText.text.toString(),contributors,0);
+            val contributors = ArrayList<Contributor>();
+            contributors.add(Contributor(auth.uid.toString(),auth.currentUser!!.displayName!!,0.0,0.0,""));
+
+            val split:Split = Split("",titleText.text.toString(),contributors,0,);
 database.child("splits").child(auth.uid.toString()).push().setValue(split).addOnFailureListener {
     Log.e("FIREBASE",it.message.toString());
     Toast.makeText(this,"Some error occured",Toast.LENGTH_SHORT).show();

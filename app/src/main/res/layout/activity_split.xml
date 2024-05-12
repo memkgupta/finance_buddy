@@ -7,4 +7,140 @@
     android:layout_height="match_parent"
     tools:context=".SplitActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBarSA"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:id="@+id/header"
+        android:background="@color/green_cool"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:layout_weight="0.5"
+
+
+            android:id="@+id/btBackSplit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_arrow_back_24"
+            tools:layout_editor_absoluteX="18dp"
+            tools:layout_editor_absoluteY="15dp" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <androidx.appcompat.widget.AppCompatImageButton
+
+            android:layout_weight="1"
+            android:id="@+id/addMemberBt"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_group_add_24" />
+    </LinearLayout>
+
+   <LinearLayout
+       android:id="@+id/titleBox"
+       app:layout_constraintTop_toBottomOf="@+id/header"
+       android:layout_width="match_parent"
+       android:layout_height="100dp"
+       android:orientation="vertical"
+       android:paddingVertical="5dp"
+       android:gravity="center">
+       <TextView
+           android:id="@+id/titleSA"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Title"
+
+           android:textSize="30sp"
+           android:textStyle="bold"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/header" />
+   <Button
+       android:id="@+id/viewMembersBT"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:padding="10dp"
+       android:text="Members"
+      />
+
+   </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/amountBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleBox">
+<TextView
+    android:id="@+id/totalExpenseSA"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/red_light"
+    android:textStyle="bold"
+    android:textSize="15sp"
+    android:text="Total Expense :"/>
+        <TextView
+            android:id="@+id/amountOweSA"
+            android:layout_marginLeft="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red_light"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="You Owe:"/>
+        <TextView
+            android:id="@+id/amountGetSA"
+            android:layout_marginLeft="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green_cool"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="You Will Get:"/>
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/expensesRVSA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/amountBox" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addExpenseBTSA"
+        android:layout_width="wrap_content"
+        android:backgroundTint="@color/green_cool"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expensesRVSA"
+        app:layout_constraintVertical_bias="0.854"
+        app:srcCompat="@drawable/baseline_add_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
